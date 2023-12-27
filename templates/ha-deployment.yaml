@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homeassistant
+  namespace: homeassistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homeassistant-label
+  template:
+    metadata:
+      labels:
+        app: homeassistant-label
+    spec:
+      hostNetwork: true
+      nodeSelector:
+        kubernetes.io/hostname: raspberry-rua
+      containers:
+      - name: homeassistant
+        image: homeassistant/home-assistant:stable
+        ports:
+          - containerPort: 8123
+        resources: {}
+        volumeMounts:
+          - mountPath: /config
+            name: homeassistant-pv-config
+          - mountPath: /etc/localtime
+            name: homeassistant-pv-time
+            readOnly: true
+      restartPolicy: Always
+      volumes:
+        - name: homeassistant-pv-config
+          persistentVolumeClaim:
+            claimName: homeassistant-pv-config
+        - name: homeassistant-pv-time
+          persistentVolumeClaim:
+            claimName: homeassistant-pv-time
+            readOnly: true
+status: {}
