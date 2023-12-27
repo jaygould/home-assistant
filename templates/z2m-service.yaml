@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: z2m-service
+  namespace: homeassistant
+  labels:
+    app: z2m
+spec:
+  type: LoadBalancer
+  selector:
+    app: z2m
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mosquitto-service
+  namespace: homeassistant
+spec:
+  type: LoadBalancer
+  selector:
+    app: mosquitto
+  ports:
+  - port: 8883

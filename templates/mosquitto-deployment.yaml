@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto
+  namespace: homeassistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: raspberry-rua
+      containers:
+      - name: mosquitto
+        image: eclipse-mosquitto
+        ports:
+        - containerPort: 8883
+        - containerPort: 9001
+        volumeMounts:
+        - mountPath: /mosquitto/config/
+          name: config
+        - mountPath: /mosquitto/data/
+          name: data
+        - mountPath: /mosquitto/password/
+          name: password
+      volumes:
+      - name: config
+        configMap:
+          name: mosquitto-config
+      - name: data
+        persistentVolumeClaim:
+          claimName: mosquitto-data
+      - name: password
+        configMap:
+          name: mosquitto-password
