@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ring
+  namespace: homeassistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homeassistant
+  template:
+    metadata:
+      labels:
+        app: homeassistant
+    spec:
+      containers:
+      - name: homeassistant
+        image: tsightler/ring-mqtt
+        ports:
+          - containerPort: 8554
+        volumeMounts:
+          - name: ring-data
+            mountPath: /data
+      volumes:
+        - name: ring-data
+          hostPath: 
+            path: /k3s-ring-data
+            type: DirectoryOrCreate
