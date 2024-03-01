@@ -13,8 +13,6 @@ spec:
       labels:
         app: mosquitto
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: raspberry-rua
       containers:
       - name: mosquitto
         image: eclipse-mosquitto

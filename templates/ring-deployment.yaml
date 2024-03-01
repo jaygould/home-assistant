@@ -13,6 +13,8 @@ spec:
       labels:
         app: homeassistant
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: raspberry-rua
       containers:
       - name: homeassistant
         image: tsightler/ring-mqtt

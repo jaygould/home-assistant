@@ -13,8 +13,6 @@ spec:
       labels:
         app: z2m
     spec:
-      # nodeSelector:
-      #   kubernetes.io/hostname: raspberry-finn
       containers:
       - name: z2m
         image: koenkk/zigbee2mqtt:latest

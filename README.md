@@ -42,3 +42,7 @@ alexa:
           - sensor.*_linkquality
           - sensor.*_battery
 ```
+
+## Example deployment to Helm
+
+`helm upgrade --install homeassistant ./ --namespace=homeassistant --create-namespace`
