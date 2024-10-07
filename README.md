@@ -2,6 +2,10 @@
 
 This repo is an example for how to integrate third party add ons to Home Assistant that is installed using Kubernetes.
 
+## Todo
+
+- The `koenkk/zigbee2mqtt` image was set to `latest` which caused issues with the small Ikea remote. I have since downgraded the image version but at some point we'll need to update this which may also require updating the dongle firmware.
+
 ## Example config
 
 A sample `configuration.yaml`:
